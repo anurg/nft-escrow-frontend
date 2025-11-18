@@ -4,6 +4,10 @@ import { useState } from 'react'
 import { useUserNFTs } from '@/hooks/useUserNFTs'
 import { NFTCard } from '../../hooks/NFTCard'
 import { CreateEscrowModal } from '@/components/CreateEscrowModal'
+
+// Prevent static generation since this page uses wallet functionality
+export const dynamic = 'force-dynamic'
+
 import { NFTAccount } from '@/types/nft'
 import { Button } from '@/components/ui/button'
 import { useWallet } from '@/hooks/useWallet'

@@ -1,5 +1,8 @@
 'use client';
 
+// Prevent static generation since this page uses Solana connections
+export const dynamic = 'force-dynamic'
+
 import { useState } from 'react';
 import { Connection } from '@solana/web3.js';
 import { Button } from '@/components/ui/button';

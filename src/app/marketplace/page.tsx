@@ -4,6 +4,10 @@ import { useState } from 'react'
 import { useEscrows } from '@/hooks/useEscrows'
 import { useWallet } from '@/hooks/useWallet'
 import { useEscrowTransactions } from '@/hooks/useEscrowTransactions'
+
+// Prevent static generation since this page uses wallet functionality
+export const dynamic = 'force-dynamic'
+
 import { EscrowCard } from '@/components/EscrowCard'
 import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'

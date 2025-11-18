@@ -1,9 +1,8 @@
-// import DashboardFeature from '@/features/dashboard/dashboard-feature'
-
-// export default function Home() {
-//   return <DashboardFeature />
-// }
 'use client'
+
+// Prevent static generation since this page uses wallet functionality
+export const dynamic = 'force-dynamic'
+
 import DashboardFeature from '@/features/dashboard/dashboard-feature'
 import { TestConnection } from '@/components/TestConnection'
 import { useUserNFTs } from '@/hooks/useUserNFTs'
