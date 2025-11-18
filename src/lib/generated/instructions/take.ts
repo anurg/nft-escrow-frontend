@@ -117,6 +117,7 @@ export type TakeInstruction<
 
 export type TakeInstructionData = { discriminator: ReadonlyUint8Array };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type TakeInstructionDataArgs = {};
 
 export function getTakeInstructionDataEncoder(): FixedSizeEncoder<TakeInstructionDataArgs> {

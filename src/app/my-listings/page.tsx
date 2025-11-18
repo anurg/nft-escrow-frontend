@@ -8,13 +8,14 @@ import { EscrowCard } from '@/components/EscrowCard'
 import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { PublicKey } from '@solana/web3.js'
+import { EscrowWithMetadata } from '@/types/escrow'
 
 export default function MyListingsPage() {
   const { escrows, loading, error, refetch } = useEscrows()
   const wallet = useWallet()
   const { refundEscrow, loading: txLoading } = useEscrowTransactions()
 
-  const [cancelConfirm, setCancelConfirm] = useState<{ open: boolean; escrow: any | null }>({
+  const [cancelConfirm, setCancelConfirm] = useState<{ open: boolean; escrow: EscrowWithMetadata | null }>({
     open: false,
     escrow: null,
   })
@@ -82,7 +83,7 @@ export default function MyListingsPage() {
 
       {!loading && !error && myListings.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500">You don't have any active listings</p>
+          <p className="text-gray-500">You don&apos;t have any active listings</p>
           <p className="text-sm text-gray-400 mt-2">
             Go to <a href="/my-nfts" className="underline">My NFTs</a> to list an NFT for sale
           </p>

@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useWallet } from './useWallet'
-import { useConnection } from './useConnection'
 import { NFTAccount } from '@/types/nft'
 import { PublicKey, Connection } from '@solana/web3.js'
 import { fetchNFTsByOwner } from './nft-fetcher'
@@ -14,16 +13,7 @@ export function useUserNFTs() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (!wallet.publicKey) {
-      setNfts([])
-      return
-    }
-
-    fetchNFTs()
-  }, [wallet.publicKey])
-
-  const fetchNFTs = async () => {
+  const fetchNFTs = useCallback(async () => {
     if (!wallet.publicKey) return
 
     setLoading(true)
@@ -37,12 +27,22 @@ export function useUserNFTs() {
 
       setNfts(fetchedNFTs)
       setLoading(false)
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error fetching NFTs:', err)
-      setError(err.message || 'Failed to fetch NFTs')
+      const error = err as Error;
+      setError(error.message || 'Failed to fetch NFTs')
       setLoading(false)
     }
-  }
+  }, [wallet.publicKey])
+
+  useEffect(() => {
+    if (!wallet.publicKey) {
+      setNfts([])
+      return
+    }
+
+    fetchNFTs()
+  }, [wallet.publicKey, fetchNFTs])
 
   return {
     nfts,

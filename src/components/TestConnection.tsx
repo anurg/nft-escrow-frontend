@@ -69,7 +69,7 @@ export function TestConnection() {
       ) : (
         <div className="space-y-3 text-center py-4">
           <p className="text-gray-600 dark:text-gray-400">Wallet not connected</p>
-          <p className="text-sm text-gray-500">Click the "Select Wallet" button in the header to connect</p>
+          <p className="text-sm text-gray-500">Click the &quot;Select Wallet&quot; button in the header to connect</p>
         </div>
       )}
     </div>

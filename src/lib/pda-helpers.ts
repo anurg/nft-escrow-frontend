@@ -1,6 +1,6 @@
 import { PublicKey } from '@solana/web3.js'
 import { getAssociatedTokenAddressSync } from '@solana/spl-token'
-import { PROGRAM_ID, METADATA_PROGRAM_ID, TOKEN_PROGRAM_ID } from './constants'
+import { PROGRAM_ID, METADATA_PROGRAM_ID } from './constants'
 
 /**
  * Derives the Escrow PDA

@@ -64,7 +64,7 @@ export function useEscrowTransactions() {
 
       setLoading(false);
       return signature;
-    } catch (err: any) {
+    } catch (err) {
       console.error('Create escrow error:', err)
       const errorMessage = formatError(err)
       toast.error(`Failed to create escrow: ${errorMessage}`, { id: 'create-escrow' })
@@ -122,7 +122,7 @@ export function useEscrowTransactions() {
 
       setLoading(false);
       return signature;
-    } catch (err: any) {
+    } catch (err) {
       console.error('Take escrow error:', err)
       const errorMessage = formatError(err)
       toast.error(`Failed to purchase NFT: ${errorMessage}`, { id: 'take-escrow' })
@@ -179,7 +179,7 @@ export function useEscrowTransactions() {
 
       setLoading(false);
       return signature;
-    } catch (err: any) {
+    } catch (err) {
       console.error('Refund escrow error:', err)
       const errorMessage = formatError(err)
       toast.error(`Failed to cancel listing: ${errorMessage}`, { id: 'refund-escrow' })

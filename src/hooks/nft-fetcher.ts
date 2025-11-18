@@ -1,27 +1,6 @@
 import { PublicKey, Connection } from '@solana/web3.js'
 import { NFTMetadata, NFTAccount } from '@/types/nft'
 
-interface DASAsset {
-  id: string
-  content: {
-    metadata: {
-      name: string
-      symbol: string
-    }
-    json_uri: string
-    files?: Array<{
-      uri: string
-      mime?: string
-    }>
-  }
-  compression: {
-    compressed: boolean
-  }
-  ownership: {
-    owner: string
-  }
-}
-
 /**
  * Fetch NFTs using Metaplex DAS API (Digital Asset Standard)
  * This works with both compressed and regular NFTs

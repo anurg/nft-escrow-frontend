@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection } from '@solana/web3.js';
 import { Button } from '@/components/ui/button';
 import { RPC_ENDPOINT, PROGRAM_ID } from '@/lib/constants';
 import bs58 from 'bs58';
@@ -55,8 +55,9 @@ export default function TestEscrowPage() {
 
       setResult(prev => prev + `Filtered accounts: ${filteredAccounts.length}\n`);
 
-    } catch (err: any) {
-      setResult(prev => prev + `\nERROR: ${err.message}\n`);
+    } catch (err) {
+      const error = err as Error;
+      setResult(prev => prev + `\nERROR: ${error.message}\n`);
     } finally {
       setLoading(false);
     }

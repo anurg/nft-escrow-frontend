@@ -72,9 +72,10 @@ export function useEscrows() {
 
       setEscrows(escrowsWithMetadata)
       setLoading(false)
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error fetching escrows:', err)
-      setError(err.message || 'Failed to fetch escrows')
+      const error = err as Error;
+      setError(error.message || 'Failed to fetch escrows')
       setLoading(false)
     }
   }

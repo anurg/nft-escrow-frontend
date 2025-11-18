@@ -66,7 +66,7 @@ export default function MyNFTsPage() {
         <div className="text-center py-12">
           <p className="text-gray-500">No NFTs found in your wallet</p>
           <p className="text-sm text-gray-400 mt-2">
-            Make sure you're connected to devnet and have NFTs in your wallet
+            Make sure you&apos;re connected to devnet and have NFTs in your wallet
           </p>
         </div>
       )}

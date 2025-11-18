@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Connection, PublicKey } from '@solana/web3.js'
+import { Connection } from '@solana/web3.js'
 import { RPC_ENDPOINT, PROGRAM_ID } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 
@@ -21,8 +21,9 @@ export function DebugEscrows() {
             .map((acc, i) => `${i + 1}. ${acc.pubkey.toBase58()}\n   Data size: ${acc.account.data.length} bytes`)
             .join('\n'),
       )
-    } catch (err: any) {
-      setResult(`Error: ${err.message}`)
+    } catch (err) {
+      const error = err as Error;
+      setResult(`Error: ${error.message}`)
     }
   }
 

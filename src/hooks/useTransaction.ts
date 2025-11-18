@@ -1,19 +1,21 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Transaction, TransactionInstruction, sendAndConfirmTransaction, Keypair } from '@solana/web3.js'
-import { useConnection } from './useConnection'
+import { TransactionInstruction, Keypair } from '@solana/web3.js'
 import { useWallet } from './useWallet'
 
+/**
+ * Legacy transaction hook - not currently used in the application.
+ * The app uses Gill and wallet-ui for transaction handling instead.
+ */
 export function useTransaction() {
-  const { connection } = useConnection()
   const wallet = useWallet()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const sendTransaction = useCallback(
-    async (instructions: TransactionInstruction[], signers?: Keypair[]): Promise<string> => {
-      if (!wallet.publicKey || !wallet.signTransaction) {
+    async (_instructions: TransactionInstruction[], _signers?: Keypair[]): Promise<string> => {
+      if (!wallet.publicKey) {
         throw new Error('Wallet not connected')
       }
 
@@ -21,45 +23,18 @@ export function useTransaction() {
       setError(null)
 
       try {
-        // Create transaction
-        const transaction = new Transaction()
-
-        // Get recent blockhash
-        const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash()
-
-        transaction.recentBlockhash = blockhash
-        transaction.feePayer = wallet.publicKey
-
-        // Add instructions
-        transaction.add(...instructions)
-
-        // Sign transaction
-        if (signers && signers.length > 0) {
-          transaction.partialSign(...signers)
-        }
-
-        const signedTx = await wallet.signTransaction(transaction)
-
-        // Send transaction
-        const signature = await connection.sendRawTransaction(signedTx.serialize())
-
-        // Confirm transaction
-        await connection.confirmTransaction({
-          signature,
-          blockhash,
-          lastValidBlockHeight,
-        })
-
-        setLoading(false)
-        return signature
-      } catch (err: any) {
-        const errorMessage = err?.message || 'Transaction failed'
+        // Note: This is legacy code that requires wallet adapter's signTransaction
+        // In production, use the Gill-based transaction methods in useEscrowTransactions
+        throw new Error('This hook is deprecated. Use useEscrowTransactions instead.')
+      } catch (err) {
+        const error = err as Error;
+        const errorMessage = error?.message || 'Transaction failed'
         setError(errorMessage)
         setLoading(false)
         throw new Error(errorMessage)
       }
     },
-    [connection, wallet],
+    [wallet],
   )
 
   return {

@@ -46,9 +46,9 @@ export function shortenAddress(address: string, chars: number = 4): string {
 /**
  * Format error messages
  */
-export function formatError(error: any): string {
-  if (error?.message) {
-    return error.message
+export function formatError(error: unknown): string {
+  if (error && typeof error === 'object' && 'message' in error) {
+    return (error as Error).message
   }
   if (typeof error === 'string') {
     return error

@@ -10,17 +10,18 @@ import { ConfirmDialog } from '@/components/ConfirmDialog'
 import { PublicKey } from '@solana/web3.js'
 import { DebugEscrows } from '@/components/DebugEscrows'
 import { formatSol } from '@/lib/utils'
+import { EscrowWithMetadata } from '@/types/escrow'
 
 export default function MarketplacePage() {
   const { escrows, loading, error, refetch } = useEscrows()
   const wallet = useWallet()
   const { takeEscrow, refundEscrow, loading: txLoading } = useEscrowTransactions()
 
-  const [buyConfirm, setBuyConfirm] = useState<{ open: boolean; escrow: any | null }>({
+  const [buyConfirm, setBuyConfirm] = useState<{ open: boolean; escrow: EscrowWithMetadata | null }>({
     open: false,
     escrow: null,
   })
-  const [cancelConfirm, setCancelConfirm] = useState<{ open: boolean; escrow: any | null }>({
+  const [cancelConfirm, setCancelConfirm] = useState<{ open: boolean; escrow: EscrowWithMetadata | null }>({
     open: false,
     escrow: null,
   })
